@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  name       String?
+  password   String?
+  companyId  Int? // foreign key to company
+  company    Company? @relation(fields: [companyId], references: [id]) // setting companyId reffers to field id in table Company
+  profileUrl String?
+  Time       Time? // user has time
+  Role       Int
+}
+
+model Company {
+  id    Int    @id @default(autoincrement())
+  name  String
+  users User[] // "hasMany" Users
+}
+
+model Time {
+  id         Int      @id @default(autoincrement())
+  userId     Int      @unique // each user has only one time
+  user       User     @relation(fields: [userId], references: [id])
+  entryTime  DateTime
+  exitTime   DateTime
+  launchTime DateTime
+}
