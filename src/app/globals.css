@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    font-family: ui-monospace;
+* {
+  font-family: ui-monospace;
 }

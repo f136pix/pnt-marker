@@ -1,31 +1,29 @@
-import {render, screen, fireEvent} from "@testing-library/react";
-import LoginPage from "./page";
+import { render, screen, fireEvent } from '@testing-library/react';
+import LoginPage from './page';
 
+describe('Login Page', () => {
+  it('allow the user to log in with credencials', () => {
+    // render the page
+    render(<LoginPage />);
 
-describe("Login Page", () => {
-    it("allow the user to log in with credencials", () => {
+    // check if inputs are displayed
+    const emailInput: HTMLInputElement = screen.getByLabelText('Email');
+    const passwordInput: HTMLInputElement = screen.getByLabelText('Password');
 
-        // render the page
-        render(<LoginPage />);
+    // fill the form
+    fireEvent.change(emailInput, { target: { value: 'testuser@example.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
 
-        // check if inputs are displayed
-        const emailInput : HTMLInputElement = screen.getByLabelText('Email');
-        const passwordInput : HTMLInputElement = screen.getByLabelText('Password');
-
-        // fill the form
-        fireEvent.change(emailInput, { target: { value: 'testuser@example.com' } });
-        fireEvent.change(passwordInput, { target: { value: 'password123' } });
-
-        // checks if send button is displayed
-        const loginBtn: HTMLButtonElement = screen.getByRole('button', { name: 'Login' });
-
-
-        expect(loginBtn).toBeInTheDocument();
-        expect(emailInput.value).toBe('testuser@example.com');
-        expect(passwordInput.value).toBe('password123');
+    // checks if send button is displayed
+    const loginBtn: HTMLButtonElement = screen.getByRole('button', {
+      name: 'Login',
     });
-});
 
+    expect(loginBtn).toBeInTheDocument();
+    expect(emailInput.value).toBe('testuser@example.com');
+    expect(passwordInput.value).toBe('password123');
+  });
+});
 
 /* login.page.test.js
 

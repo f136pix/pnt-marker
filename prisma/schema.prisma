@@ -11,18 +11,20 @@ model User {
   id         Int      @id @default(autoincrement())
   email      String   @unique
   name       String?
-  password   String?
   companyId  Int? // foreign key to company
   company    Company? @relation(fields: [companyId], references: [id]) // setting companyId reffers to field id in table Company
   profileUrl String?
   Time       Time? // user has time
-  Role       Int
+  role       Int // 1 user //2 adm //3 owner
 }
 
 model Company {
-  id    Int    @id @default(autoincrement())
+  id    Int     @id @default(autoincrement())
   name  String
   users User[] // "hasMany" Users
+  email String
+  phone String
+  logo  String?
 }
 
 model Time {
