@@ -20,12 +20,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     case 'POST':
       // Handle POST request
-      handlePostRequest(res, query);
+      handlePostRequest(req, res);
       break;
 
     case 'DELETE':
       // Handle DELETE request
-      handleDeleteRequest(res, query);
+      handleDeleteRequest(req, res);
       break;
 
     default:
@@ -56,7 +56,7 @@ async function handleGetRequest(res: NextApiResponse, query: QueryParameters) {
       },
     });
     if (users) {
-      res.status(200).json({ data: { users } });
+      res.status(200).json({ data: { users }, status: 200 });
     }
     res.status(404).json({ err: 'wasnt found any user', data: {} });
   }
@@ -66,12 +66,25 @@ async function handleGetRequest(res: NextApiResponse, query: QueryParameters) {
     .json({ err: 'query must be either by id or email', data: {} });
 }
 
-function handlePostRequest(res: NextApiResponse, query: QueryParameters) {
-  // Your logic for handling POST request
-  res.status(200).json({ method: 'POST', query });
+async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
+  const id = req.body.id;
+  const user = req.body.user;
+
+await prisma.user.update({
+      where: {
+        id: id
+      },
+    data : user
+  }).then((user) =>   res.status(200).json({ message: 'user updated', data: user, status: 200 }))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json(err)
+    }
+    );
 }
 
-function handleDeleteRequest(res: NextApiResponse, query: QueryParameters) {
-  // Your logic for handling DELETE request
-  res.status(200).json({ method: 'DELETE', query });
+function handleDeleteRequest(req: NextApiRequest, res: NextApiResponse) {
+  const id = req.body.id;
+
+  res.status(200).json({ method: 'DELETE'});
 }

@@ -21,6 +21,7 @@ async function Page(context) {
     let data;
     const {params} = context;
     const {id} = params;
+    const retrieveData = async() => {
     try {
         data = await axiosGetHandler(`company?id=${id}`);
     } catch (err) {
@@ -31,6 +32,9 @@ async function Page(context) {
             errMsg = 'Houve um erro inesperado';
         }
     }
+    };
+
+    await retrieveData();
     return (
         <div>
             <Header/>
