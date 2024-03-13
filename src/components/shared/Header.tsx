@@ -7,8 +7,14 @@ import {usePathname, useRouter} from 'next/navigation';
 import {IUser} from '@/types';
 import {useAuth} from '@/context/AuthProvider';
 import Link from 'next/link';
+import {cn} from "../../../utils";
+import {className} from "postcss-selector-parser";
 
-function Header() {
+type Iprops = {
+    className?: string
+}
+
+function Header(props: Iprops) {
     const router = useRouter();
     const {user} = useAuth();
     const pathname = usePathname();
@@ -26,7 +32,7 @@ function Header() {
     return (
         <nav
             className={
-                'bg-slate-900 h-[4rem] flex flex-row justify-between w-screen items-center'
+                cn('bg-slate-900 h-[4rem] flex flex-row justify-between w-screen items-center', props.className)
             }
         >
             <div

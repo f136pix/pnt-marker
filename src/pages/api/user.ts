@@ -77,8 +77,8 @@ await prisma.user.update({
     data : user
   }).then((user) =>   res.status(200).json({ message: 'user updated', data: user, status: 200 }))
     .catch((err) => {
-      console.log(err)
-      res.status(500).json(err)
+      console.log(err);
+      res.status(500).json(err);
     }
     );
 }
