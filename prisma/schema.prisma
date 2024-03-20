@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  name       String?
-  companyId  Int? // foreign key to company
-  company    Company? @relation(fields: [companyId], references: [id]) // setting companyId reffers to field id in table Company
-  profileUrl String?
-  Time       Time? // user has time
-  role       Int // 1 user //2 adm //3 owner
+  id              Int              @id @default(autoincrement())
+  email           String           @unique
+  name            String?
+  companyId       Int? // foreign key to company
+  company         Company?         @relation(fields: [companyId], references: [id]) // setting companyId reffers to field id in table Company
+  profileUrl      String?
+  Time            Time? // user has time
+  role            Int // 1 user //2 adm //3 owner
+  registeredTimes RegisteredTime[] // "hasMany" RegisteredTimes
 }
 
 model Company {
@@ -28,10 +29,22 @@ model Company {
 }
 
 model Time {
-  id         Int      @id @default(autoincrement())
-  userId     Int      @unique // each user has only one time
-  user       User     @relation(fields: [userId], references: [id])
-  entryTime  DateTime
-  exitTime   DateTime
-  launchTime DateTime
+  id         Int    @id @default(autoincrement())
+  userId     Int    @unique // each user has only one time
+  user       User   @relation(fields: [userId], references: [id])
+  entryTime  String
+  exitTime   String
+  launchTime String
+}
+
+model RegisteredTime {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  user            User     @relation(fields: [userId], references: [id])
+  date            DateTime
+  entryTime       String
+  exitTime        String
+  launchTimeStart String
+  launchTimeEnd   String
+  launchTimeMade  String
 }

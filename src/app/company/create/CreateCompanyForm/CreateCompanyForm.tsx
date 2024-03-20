@@ -35,9 +35,7 @@ function CreateCompanyForm({className}: props) {
     const [postData, setPostData] = useState('');
     // controlling img value
     const [imgValue, setImgValue] = useState();
-
     const [showImg, setShowImg] = useState<boolean>(false);
-
     const [errMsg, setErrMsg] = useState<false | string>(false);
 
     // react form-hook

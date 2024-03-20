@@ -15,7 +15,7 @@ import {axiosGetHandler, axiosPostHandler} from "../../../../utils/axios";
 import {IUser} from "@/types";
 import {ListChildComponentProps, FixedSizeList} from "react-window";
 import {PlusCircle} from "lucide-react";
-
+import {brown} from '@mui/material/colors';
 
 type IProps = {
     isOpen: boolean,
@@ -23,16 +23,16 @@ type IProps = {
     companyId : number
 }
 
+const browmBg = brown[200];
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: '#4e5a65',
+    bgcolor: browmBg,
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
 };
 
 function AddUserToCompanyModal({isOpen, handleClose, companyId}: IProps) {
@@ -73,7 +73,7 @@ function AddUserToCompanyModal({isOpen, handleClose, companyId}: IProps) {
                 <Fade in={isOpen}>
                     <Box sx={style}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
-                            <h1 className={'font-bold text-[1.5rem] text-neutral-200'}>Add users to your company</h1>
+                            <h1 className={'font-bold text-[1.5rem] text-neutral-900 text-center pt-1'}>Add users to your company</h1>
                         </Typography>
                         <Typography id="modal-modal-description" sx={{mt: 2}}>
                             <FixedSizeList
@@ -116,7 +116,7 @@ function renderRow(props: ListChildComponentProps, data: IUser[] | undefined, up
 
     return (
         <ListItem style={style} key={index} component="div" disablePadding className={'my-[0.5rem]'}>
-            <ListItemButton className={'flex cursor-default text-neutral-200'}>
+            <ListItemButton className={'flex cursor-default text-neutral-800'}>
                <ListItemText>{data[index]?.name}</ListItemText>
                 <ListItemText className={'text-green-400 hover:text-green-600'}><PlusCircle size={20} className={'mx-auto cursor-pointer'} onClick={(() => assignUserToCompany(data[index]?.id))}/></ListItemText>
             </ListItemButton>

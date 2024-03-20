@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import {Button} from "@mui/material";
 import {ICompany, IUser} from "@/types";
-import {AtSign, Crown, Delete, Mails, Phone} from "lucide-react";
+import {ArrowLeft, AtSign, Crown, Delete, Mails, Phone} from "lucide-react";
 import {TextField, Alert, Fade, Zoom} from '@mui/material';
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
@@ -12,6 +12,7 @@ import {FixedSizeList, ListChildComponentProps} from 'react-window';
 import {axiosGetHandler, axiosPostHandler} from "../../../../utils/axios";
 import Dropdown from "@/components/shared/Dropdown";
 import AddUserToCompanyModal from "@/app/company/AddUserToCompanyModal/AddUserToCompanyModal";
+import Link from "next/link";
 
 
 type props = {
@@ -53,6 +54,7 @@ function CompanyUsersList({data, refreshUsers}: props) {
 
     return (
         <div className={'w-screen mb-2'}>
+            <Link href={'/'}><ArrowLeft size={48} className={'font-extrabold absolute ml-4 mt-[2%] text-zinc-800 hover:text-black transition cursor-pointer'} ></ArrowLeft></Link>
             <div
                 className={'bg-slate-900 h-auto w-[80%] mx-auto rounded mt-[2rem] text-center flex flex-col pb-[2rem] shadow-2xl'}>
                 <h1 className={'font-bold text-neutral-200 text-[4rem] uppercase'}>{data.name}</h1>
@@ -82,7 +84,7 @@ function CompanyUsersList({data, refreshUsers}: props) {
                         <Button variant={'outlined'} color={'success'}
                                 className={'rounded-3xl text-white border-white w-[2rem] mx-auto mb-[1rem]'}
                                 onClick={handleOpen}>+</Button>
-                        <Zoom in={showBanner}>{DeleteBanner}</Zoom>
+                        <Zoom in={showBanner} className={'mb-6 w-auto h-[4rem] mx-auto'}>{DeleteBanner}</Zoom>
                     </div>
                 </section>
             </div>

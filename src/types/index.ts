@@ -24,3 +24,16 @@ export type ITimes = {
     launchTime?: string;
 }
 
+export type IRegisteredTime = {
+    id: number;
+    userId: number;
+    date?: Date;
+    entryTime?: string;
+    exitTime?: string;
+    launchTimeStart ?: string;
+    launchTimeEnd ?: string;
+    launchTime?: string;
+
+
+};
+

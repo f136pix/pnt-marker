@@ -20,7 +20,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
         case 'POST':
             // Handle POST request
-            // handlePostRequest(req, res);
+            handlePostRequest(req, res);
             break;
 
         case 'DELETE':
@@ -40,14 +40,26 @@ const handleGetRequest = async (res: NextApiResponse, query: QueryParameters) =>
                 userId: toNumber(query.userId)
             },
         });
+        //console.log(query.userId);
+        //console.log(times);
         if (times) {
             res.status(200).json({data: {times}, status: 200});
         }
-        if(times == null)
-        {
+        if (times == null) {
             res.status(404).json({err: 'no time registered for this user', data: {}});
         }
         res.status(405).json({err: 'internal error', data: {}});
-
     }
+};
+const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
+    const {userId, entryTime, exitTime, launchTime} = req.body;
+    const time = await prisma.time.create({
+        data: {
+            entryTime,
+            exitTime,
+            launchTime,
+            userId: userId,
+        },
+    });
+    res.status(201).json({data: {time}, status: 201});
 };
