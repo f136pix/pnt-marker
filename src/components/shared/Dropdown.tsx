@@ -14,8 +14,8 @@ function Dropdown(props: props) {
     const [role, setRole] = React.useState(props.role);
 
     const handleChange = (event: SelectChangeEvent) => {
-        setRole(event.target.value as number);
-        props.callback(props.id, event.target.value as number);
+        setRole(event.target.value as unknown as number);
+        props.callback(props.id, event.target.value as unknown as number);
     };
 
     return (
@@ -25,7 +25,7 @@ function Dropdown(props: props) {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={role}
+                    value={role.toString()}
                     label="Age"
                     onChange={handleChange}
                 >

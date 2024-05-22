@@ -11,7 +11,7 @@ import useSWR from 'swr';
 import {fetcher} from '../../utils';
 import {IUser} from '@/types';
 import ScreenWrapper from "../../utils/components/ScreenWrapper";
-import RegisterTimeSection from "@/components/shared/RegisterTimeSection";
+import MainSection from "@/components/shared/MainSection";
 
 export default function Home() {
     const {user} = useAuth();
@@ -47,7 +47,7 @@ export default function Home() {
     return (
         <ScreenWrapper className={'bg-gray-100'}>
             <Header className={'mb-[4rem]'}/>
-            <RegisterTimeSection userId={user?.id}/>
+            <MainSection userId={user?.id}/>
             <Snackbar
                 open={showLoggedToast}
                 autoHideDuration={5000}

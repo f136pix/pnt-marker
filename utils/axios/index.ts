@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig} from "axios";
 
 const BASE_URL = 'http://localhost:3000/api';
 
-export const axiosPostHandler = async (subUrl: string, data: any, headers: AxiosRequestConfig['headers'] | null = null) => {
+export const axiosPostHandler = async (subUrl: string, data: any, headers: AxiosRequestConfig['headers'] | undefined = undefined) => {
     try {
         console.log(`${BASE_URL}/${subUrl}`);
         const response = await axios.post(`${BASE_URL}/${subUrl}`, data, {headers});
@@ -16,7 +16,7 @@ export const axiosPostHandler = async (subUrl: string, data: any, headers: Axios
 export const axiosGetHandler = async (
     subUrl: string,
     params: any = {},
-    headers: AxiosRequestConfig['headers'] | null = null
+    headers: AxiosRequestConfig['headers'] | undefined = undefined
 ) => {
     try {
         console.log(`${BASE_URL}/${subUrl}`);

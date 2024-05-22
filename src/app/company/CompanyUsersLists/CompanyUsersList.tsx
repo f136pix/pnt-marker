@@ -16,12 +16,12 @@ import Link from "next/link";
 
 
 type props = {
-    data: ICompany,
+    company: ICompany,
     refreshUsers: Promise<void>
 }
 
-function CompanyUsersList({data, refreshUsers}: props) {
-    const [companyUsers, setCompanyUsers] = useState<IUser[] | undefined>(data.users);
+function CompanyUsersList({company, refreshUsers}: props) {
+    const [companyUsers, setCompanyUsers] = useState<IUser[] | undefined>(company.users);
     const [showBanner, setShowBanner] = useState(false);
     // add user modal handlers
     const [open, setOpen] = React.useState(false);
@@ -44,8 +44,8 @@ function CompanyUsersList({data, refreshUsers}: props) {
     // retrieves updated userData
     const updateUserData = async () => {
         try {
-            data = await axiosGetHandler(`company?id=${data.id}`);
-            setCompanyUsers(data.data.company.users);
+            company = await axiosGetHandler(`company?id=${company.id}`);
+            setCompanyUsers(company.data.company.users);
         } catch (err) {
             console.log(err);
         }
@@ -57,15 +57,15 @@ function CompanyUsersList({data, refreshUsers}: props) {
             <Link href={'/'}><ArrowLeft size={48} className={'font-extrabold absolute ml-4 mt-[2%] text-zinc-800 hover:text-black transition cursor-pointer'} ></ArrowLeft></Link>
             <div
                 className={'bg-slate-900 h-auto w-[80%] mx-auto rounded mt-[2rem] text-center flex flex-col pb-[2rem] shadow-2xl'}>
-                <h1 className={'font-bold text-neutral-200 text-[4rem] uppercase'}>{data.name}</h1>
+                <h1 className={'font-bold text-neutral-200 text-[4rem] uppercase'}>{company.name}</h1>
                 <section className={'flex flex-col align-middle mt-[1rem] justify-center'}>
                     <div className={'flex w-full h-[3rem] bg-neutral-100 items-center hover:bg-neutral-300 transition'}>
                         <Mails size={15} className={'absolute ml-8'}/>
-                        <h2 className={'w-[50%] mx-auto bg-transparent'}>{data.email}</h2>
+                        <h2 className={'w-[50%] mx-auto bg-transparent'}>{company.email}</h2>
                     </div>
                     <div className={'flex w-full h-[3rem] bg-neutral-100 items-center hover:bg-neutral-300 transition'}>
                         <Phone size={15} className={'absolute ml-8'}/>
-                        <h2 className={'bg-transparent w-[50%] mx-auto'}>{data.phone}</h2>
+                        <h2 className={'bg-transparent w-[50%] mx-auto'}>{company.phone}</h2>
                     </div>
                 </section>
                 <section>
@@ -74,7 +74,7 @@ function CompanyUsersList({data, refreshUsers}: props) {
                         height={300}
                         width={360}
                         itemSize={46}
-                        itemCount={companyUsers?.length}
+                        itemCount={companyUsers!.length}
                         overscanCount={5}
                         className={'mx-auto bg-neutral-100 rounded'}
                     >
@@ -88,7 +88,7 @@ function CompanyUsersList({data, refreshUsers}: props) {
                     </div>
                 </section>
             </div>
-            <AddUserToCompanyModal isOpen={open} handleClose={handleClose} companyId={data.id}/>
+            <AddUserToCompanyModal isOpen={open} handleClose={handleClose} companyId={company.id}/>
         </div>
     );
 }

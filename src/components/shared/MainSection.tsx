@@ -4,7 +4,7 @@ import {Button, TextField} from "@mui/material";
 import ShowCurrentTime from "@/components/shared/ShowCurrentTime";
 import {IRegisteredTime, ITimes} from "@/types";
 import {axiosGetHandler} from "../../../utils/axios";
-import AddTimesToUserModal from "@/components/shared/AddTimesToUserModal";
+import AddTimesToUserModal from "@/components/modal/AddTimesToUserModal";
 import {RegisteredTimeSection} from "@/components/shared/RegisteredTimeSection";
 
 
@@ -21,7 +21,7 @@ const initialTime: IRegisteredTime = {
     launchTime:undefined
 };
 
-function RegisterTimeSection(props: IProps) {
+function MainSection(props: IProps) {
     const [timeData, setTimeData] = useState<ITimes | false>();
     const [todayTimes, setTodayTimes] = useState<IRegisteredTime>(initialTime);
     const [open, setOpen] = useState(false);
@@ -79,7 +79,7 @@ function RegisterTimeSection(props: IProps) {
                 <ShowCurrentTime className={'font-bold text-[3rem]'}/>
                 <AlarmClock className={'mx-auto'} size={300}/>
             </div>
-            <div className={'w-screen flex justify-center mt-[2rem] p-2 bg-slate-700 h-full'}>
+            <div className={'w-screen flex justify-center mt-[2rem] p-2 bg-black h-full'}>
                 <div>
                     {timeData == false &&
                         <div className={'flex flex-col'}>
@@ -101,4 +101,4 @@ function RegisterTimeSection(props: IProps) {
         ;
 }
 
-export default RegisterTimeSection;
+export default MainSection;
